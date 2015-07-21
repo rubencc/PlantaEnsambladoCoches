@@ -41,7 +41,9 @@
   <ItemGroup>
     <Compile Include="Model\Centralita.cs" />
     <Compile Include="Model\Coche.cs" />
+    <Compile Include="Model\CocheElectrico.cs" />
     <Compile Include="Model\Motor.cs" />
+    <Compile Include="Model\MotorElectrico.cs" />
     <Compile Include="Model\TanqueCombustible.cs" />
     <Compile Include="Model\Transmision.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
