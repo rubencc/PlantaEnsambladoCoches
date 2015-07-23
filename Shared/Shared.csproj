@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\Bateria.cs" />
     <Compile Include="Model\Centralita.cs" />
     <Compile Include="Model\Coche.cs" />
     <Compile Include="Model\CocheElectrico.cs" />
