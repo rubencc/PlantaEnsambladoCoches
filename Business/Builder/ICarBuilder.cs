@@ -7,7 +7,7 @@ namespace Business.Builder
     {
         Coche EnsamblarCoche();
         void CrearCentralita(bool abs, bool airbag, bool bas, bool gps, bool direccionAsistida, bool tcs, bool esp);
-        void CrarMotor(int potenciaKw, int potenciaCv, int capacidad, int cilindros);
+        void CrearMotor(int potenciaKw, int potenciaCv, int capacidad, int cilindros);
         void CrearTanqueCombustible(Decimal capacidad);
         void CrearTransmision(int marchas);
     }
