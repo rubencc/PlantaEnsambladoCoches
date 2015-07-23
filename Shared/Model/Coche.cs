@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using Newtonsoft.Json;
 
 namespace Shared.Model
 {
@@ -14,5 +19,13 @@ namespace Shared.Model
         public String Marca { get; set; }
         public String LugarDeEnsamblado { get; set; }
         public DateTime FechaDeEnsamblado { get; set; }
+
+        public override string ToString()
+        {
+            string s = JsonConvert.SerializeObject(this, Formatting.Indented);
+            return s;
+        }
+
+        
     }
 }

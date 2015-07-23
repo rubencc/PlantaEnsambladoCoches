@@ -2,9 +2,9 @@
 {
     public class Motor
     {
-        public int PotenciaKW { get; set; }
-        public int PotenciaCV { get; set; }
-        public int Capacidad { get; set; }
+        public decimal PotenciaKW { get; set; }
+        public decimal PotenciaCV { get; set; }
+        public decimal Capacidad { get; set; }
         public int Cilindros { get; set; }
     }
 }
