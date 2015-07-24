@@ -1,41 +1,24 @@
 ﻿using System;
 using Business.Builder;
+using Business.Decorators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shared.Model;
 
-namespace Test.Unitarios.Builder
+namespace Test.Unitarios.Decorator
 {
     [TestClass]
-    public class CarBuilderTest
+    public class DecoratorCarBuilderTest
     {
-
-        private CarBuilder builder;
+        private DecoratorCarBuilder builder;
 
         [TestInitialize]
         public void Setup()
         {
-            this.builder = new CarBuilder();
-        }
-
-        [Ignore]
-        [TestMethod]
-        public void Construir_coche_y_compararlo_con_el_estandar()
-        {
-            builder.CrearCentralita(true, true, true, true, true, false, false);
-            builder.CrearMotor(110.3098125M, 150, 2000, 4);
-            builder.CrearTanqueCombustible(60);
-            builder.CrearTransmision(6);
-
-            Coche coche = builder.ObtenerCoche();
-
-            Coche expected = this.GetCar();
-
-            Assert.AreEqual(expected.ToString(), coche.ToString());
-
+            this.builder = new DecoratorCarBuilder(new CarBuilder());
         }
 
         [TestMethod]
-        public void Construir_coche_y_evaluar_centralita()
+        public void Construir_hibrido_y_evaluar_centralita()
         {
             builder.CrearCentralita(true, true, true, true, true, false, false);
 
@@ -45,7 +28,7 @@ namespace Test.Unitarios.Builder
         }
 
         [TestMethod]
-        public void Construir_coche_y_evaluar_motor()
+        public void Construir_hibrido_y_evaluar_motor()
         {
             builder.CrearMotor(110.3098125M, 150, 2000, 4);
 
@@ -55,7 +38,7 @@ namespace Test.Unitarios.Builder
         }
 
         [TestMethod]
-        public void Construir_coche_y_evaluar_tanque_de_combustible()
+        public void Construir_hibrido_y_evaluar_tanque_de_combustible()
         {
             builder.CrearTanqueCombustible(60);
 
@@ -65,7 +48,7 @@ namespace Test.Unitarios.Builder
         }
 
         [TestMethod]
-        public void Construir_coche_y_evaluar_transmision()
+        public void Construir_hibrido_y_evaluar_transmision()
         {
             builder.CrearTransmision(6);
 
@@ -75,7 +58,7 @@ namespace Test.Unitarios.Builder
         }
 
         [TestMethod]
-        public void Construir_coche_y_evaluar_todas_las_partes()
+        public void Construir_hibrido_y_evaluar_todas_las_partes()
         {
             builder.CrearCentralita(true, true, true, true, true, false, false);
             builder.CrearMotor(110.3098125M, 150, 2000, 4);
@@ -85,17 +68,15 @@ namespace Test.Unitarios.Builder
             Coche coche = builder.ObtenerCoche();
 
             this.AssertCentralita(coche);
-
             this.AssertMotor(coche);
-
             this.AssertTanqueCombustible(coche);
-
             this.AssertTransmision(coche);
+            this.AssertBateriaYMotorElectrico(coche);
 
         }
 
         [TestMethod]
-        public void Construir_coche_y_evaluar_que_sus_partes_no_sean_nulas()
+        public void Construir_hibrido_y_evaluar_que_sus_partes_no_sean_nulas()
         {
             builder.CrearCentralita(true, true, true, true, true, false, false);
             builder.CrearMotor(110.3098125M, 150, 2000, 4);
@@ -112,7 +93,7 @@ namespace Test.Unitarios.Builder
         }
 
         [TestMethod]
-        public void Construir_coche_y_evaluar_parte_no_comun()
+        public void Construir_hibrido_y_evaluar_parte_no_comun()
         {
             builder.CrearCentralita(true, true, true, true, true, false, false);
             builder.CrearMotor(110.3098125M, 150, 2000, 4);
@@ -126,48 +107,6 @@ namespace Test.Unitarios.Builder
             Assert.IsNull(coche.LugarDeEnsamblado);
             Assert.IsNull(coche.Bastidor);
             Assert.AreEqual(new DateTime(), coche.FechaDeEnsamblado);
-
-        }
-
-        private Coche GetCar()
-        {
-            Coche coche = new CocheGasolina()
-            {
-                Centralita = new Centralita()
-                {
-                    ABS = true,
-                    Airbag = true,
-                    BAS = true,
-                    DireccionAsistida = true,
-                    ESP = false,
-                    GPS = true,
-                    TCS = false
-                },
-                Bastidor = "123456",
-                FechaDeEnsamblado = new DateTime(2015, 1, 1),
-                LugarDeEnsamblado = "Albacete",
-                Marca = "Matel",
-                Modelo = "Autoloco",
-                Motor = new Motor()
-                {
-                    Capacidad = 2000,
-                    PotenciaCV = 150,
-                    PotenciaKW = 110.3098125M,
-                    Cilindros = 4
-
-                },
-                TanqueCombustible = new TanqueCombustible()
-                {
-                    Capacidad = 66.5M
-                },
-                Transmision = new Transmision()
-                {
-                    Marchas = 6
-                }
-            };
-
-            return coche;
-
 
         }
 
@@ -198,6 +137,15 @@ namespace Test.Unitarios.Builder
         private void AssertTransmision(Coche coche)
         {
             Assert.AreEqual(6, coche.Transmision.Marchas);
+        }
+
+        private void AssertBateriaYMotorElectrico(Coche coche)
+        {
+            CocheElectrico cocheElectrico = coche as CocheElectrico;
+
+            Assert.IsNotNull(cocheElectrico);
+            Assert.AreEqual(90000, cocheElectrico.Bateria.Capacidad);
+            Assert.AreEqual(100, cocheElectrico.MotorElectrico.PotenciaKW);
         }
     }
 }

@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B9CF47E1-C871-4D67-BCD1-67C2B07F5A8B}</ProjectGuid>
+    <ProjectGuid>{54CB4D2D-6FFD-40CA-8859-D6EB88C3D70E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Test.Unitarios</RootNamespace>
-    <AssemblyName>Test.Unitarios</AssemblyName>
+    <RootNamespace>TestCommon</RootNamespace>
+    <AssemblyName>TestCommon</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.2.1507.0118\lib\net40\Moq.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -53,31 +50,8 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Builder\CarBuilderTest.cs" />
-    <Compile Include="Decorator\DecoratorCarBuilderTest.cs" />
-    <Compile Include="Factoria\ConcreteCarFactoryTest.cs" />
-    <Compile Include="Mocks\CarBuilderMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CocheTest.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Business\Business.csproj">
-      <Project>{a21ec561-6672-4a7f-ab14-93485c1c016f}</Project>
-      <Name>Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Shared\Shared.csproj">
-      <Project>{52f82a42-3d57-45ef-9812-4472fa375849}</Project>
-      <Name>Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Test.Common\Test.Common.csproj">
-      <Project>{d5717475-f761-4537-951f-55ff9e4a073e}</Project>
-      <Name>Test.Common</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
