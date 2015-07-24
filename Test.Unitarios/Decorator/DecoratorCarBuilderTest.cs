@@ -3,6 +3,7 @@ using Business.Builder;
 using Business.Decorators;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shared.Model;
+using Test.Common;
 
 namespace Test.Unitarios.Decorator
 {
@@ -24,7 +25,7 @@ namespace Test.Unitarios.Decorator
 
             Coche coche = builder.ObtenerCoche();
 
-            this.AssertCentralita(coche);
+            AssertParaCoche.AssertCentralitaSinESPniTCS(coche);
         }
 
         [TestMethod]
@@ -34,7 +35,7 @@ namespace Test.Unitarios.Decorator
 
             Coche coche = builder.ObtenerCoche();
 
-            this.AssertMotor(coche);
+            AssertParaCoche.AssertMotor(coche);
         }
 
         [TestMethod]
@@ -44,7 +45,7 @@ namespace Test.Unitarios.Decorator
 
             Coche coche = builder.ObtenerCoche();
 
-            this.AssertTanqueCombustible(coche);
+            AssertParaCoche.AssertTanqueCombustible(coche);
         }
 
         [TestMethod]
@@ -54,7 +55,7 @@ namespace Test.Unitarios.Decorator
 
             Coche coche = builder.ObtenerCoche();
 
-            this.AssertTransmision(coche);
+            AssertParaCoche.AssertTransmision(coche);
         }
 
         [TestMethod]
@@ -67,11 +68,11 @@ namespace Test.Unitarios.Decorator
 
             Coche coche = builder.ObtenerCoche();
 
-            this.AssertCentralita(coche);
-            this.AssertMotor(coche);
-            this.AssertTanqueCombustible(coche);
-            this.AssertTransmision(coche);
-            this.AssertBateriaYMotorElectrico(coche);
+            AssertParaCoche.AssertCentralitaSinESPniTCS(coche);
+            AssertParaCoche.AssertMotor(coche);
+            AssertParaCoche.AssertTanqueCombustible(coche);
+            AssertParaCoche.AssertTransmision(coche);
+            AssertParaCoche.AssertBateriaYMotorElectrico(coche);
 
         }
 
@@ -108,44 +109,6 @@ namespace Test.Unitarios.Decorator
             Assert.IsNull(coche.Bastidor);
             Assert.AreEqual(new DateTime(), coche.FechaDeEnsamblado);
 
-        }
-
-        private void AssertCentralita(Coche coche)
-        {
-            Assert.IsTrue(coche.Centralita.ABS);
-            Assert.IsTrue(coche.Centralita.Airbag);
-            Assert.IsTrue(coche.Centralita.BAS);
-            Assert.IsTrue(coche.Centralita.DireccionAsistida);
-            Assert.IsTrue(coche.Centralita.GPS);
-            Assert.IsFalse(coche.Centralita.ESP);
-            Assert.IsFalse(coche.Centralita.TCS);
-        }
-
-        private void AssertMotor(Coche coche)
-        {
-            Assert.AreEqual(2000, coche.Motor.Capacidad);
-            Assert.AreEqual(4, coche.Motor.Cilindros);
-            Assert.AreEqual(150, coche.Motor.PotenciaCV);
-            Assert.AreEqual(110.3098125M, coche.Motor.PotenciaKW);
-        }
-
-        private void AssertTanqueCombustible(Coche coche)
-        {
-            Assert.AreEqual(60, coche.TanqueCombustible.Capacidad);
-        }
-
-        private void AssertTransmision(Coche coche)
-        {
-            Assert.AreEqual(6, coche.Transmision.Marchas);
-        }
-
-        private void AssertBateriaYMotorElectrico(Coche coche)
-        {
-            CocheElectrico cocheElectrico = coche as CocheElectrico;
-
-            Assert.IsNotNull(cocheElectrico);
-            Assert.AreEqual(90000, cocheElectrico.Bateria.Capacidad);
-            Assert.AreEqual(100, cocheElectrico.MotorElectrico.PotenciaKW);
         }
     }
 }

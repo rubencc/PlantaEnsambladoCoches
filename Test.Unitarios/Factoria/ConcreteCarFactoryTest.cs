@@ -3,6 +3,7 @@ using Business.Factories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Shared.Model;
+using Test.Common;
 using Test.Unitarios.Mocks;
 
 namespace Test.Unitarios.Factoria
@@ -13,21 +14,26 @@ namespace Test.Unitarios.Factoria
         private ConcreteCarFactory factory;
         private CarBuilderMock carBuilderMock;
 
-        [TestMethod]
-        public void Crear_Coche()
+        [TestInitialize]
+        public void Setup()
         {
             this.carBuilderMock = new CarBuilderMock();
             this.factory = new ConcreteCarFactory(carBuilderMock.GetMock());
+        }
+
+        [TestMethod]
+        public void Crear_Coche()
+        {           
             string sku = "ABC";
 
             this.carBuilderMock.Setup(this.GetCar());
 
             Coche coche = this.factory.CrearCoche("ABC");
 
-            this.AssertCentralita(coche);
-            this.AssertMotor(coche);
-            this.AssertTanqueCombustible(coche);
-            this.AssertTransmision(coche);
+            AssertParaCoche.AssertCentralitaSinESPniTCS(coche);
+            AssertParaCoche.AssertMotor(coche);
+            AssertParaCoche.AssertTanqueCombustible(coche);
+            AssertParaCoche.AssertTransmision(coche);
 
             Assert.AreEqual("Albacete", coche.LugarDeEnsamblado);
             Assert.AreEqual(DateTime.Today, coche.FechaDeEnsamblado);
@@ -40,18 +46,16 @@ namespace Test.Unitarios.Factoria
         [TestMethod]
         public void Crear_Coche_con_centralita_basica()
         {
-            this.carBuilderMock = new CarBuilderMock();
-            this.factory = new ConcreteCarFactory(carBuilderMock.GetMock());
             string sku = "ABCZZ";
 
             this.carBuilderMock.Setup(this.GetCar());
 
             Coche coche = this.factory.CrearCoche(sku);
 
-            this.AssertCentralita(coche);
-            this.AssertMotor(coche);
-            this.AssertTanqueCombustible(coche);
-            this.AssertTransmision(coche);
+            AssertParaCoche.AssertCentralitaSinESPniTCS(coche);
+            AssertParaCoche.AssertMotor(coche);
+            AssertParaCoche.AssertTanqueCombustible(coche);
+            AssertParaCoche.AssertTransmision(coche);
 
             Assert.AreEqual("Albacete", coche.LugarDeEnsamblado);
             Assert.AreEqual(DateTime.Today, coche.FechaDeEnsamblado);
@@ -101,35 +105,6 @@ namespace Test.Unitarios.Factoria
             return coche;
 
 
-        }
-
-        private void AssertCentralita(Coche coche)
-        {
-            Assert.IsTrue(coche.Centralita.ABS);
-            Assert.IsTrue(coche.Centralita.Airbag);
-            Assert.IsTrue(coche.Centralita.BAS);
-            Assert.IsTrue(coche.Centralita.DireccionAsistida);
-            Assert.IsTrue(coche.Centralita.GPS);
-            Assert.IsFalse(coche.Centralita.ESP);
-            Assert.IsFalse(coche.Centralita.TCS);
-        }
-
-        private void AssertMotor(Coche coche)
-        {
-            Assert.AreEqual(2000, coche.Motor.Capacidad);
-            Assert.AreEqual(4, coche.Motor.Cilindros);
-            Assert.AreEqual(150, coche.Motor.PotenciaCV);
-            Assert.AreEqual(110.3098125M, coche.Motor.PotenciaKW);
-        }
-
-        private void AssertTanqueCombustible(Coche coche)
-        {
-            Assert.AreEqual(60, coche.TanqueCombustible.Capacidad);
-        }
-
-        private void AssertTransmision(Coche coche)
-        {
-            Assert.AreEqual(6, coche.Transmision.Marchas);
         }
     }
 }

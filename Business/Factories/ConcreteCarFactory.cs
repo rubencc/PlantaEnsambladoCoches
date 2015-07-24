@@ -33,6 +33,8 @@ namespace Business.Factories
             this.builder.CrearTanqueCombustible(60);
             this.builder.CrearTransmision(6);
 
+            //Coche coche = this.EnsamblarCoche();
+
             coche.Modelo = sku;
             coche.LugarDeEnsamblado = "Albacete";
             coche.FechaDeEnsamblado = DateTime.Today;
