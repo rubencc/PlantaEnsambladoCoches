@@ -17,23 +17,6 @@ namespace Test.Unitarios.Builder
             this.builder = new CarBuilder();
         }
 
-        [Ignore]
-        [TestMethod]
-        public void Construir_coche_y_compararlo_con_el_estandar()
-        {
-            builder.CrearCentralita(true, true, true, true, true, false, false);
-            builder.CrearMotor(110.3098125M, 150, 2000, 4);
-            builder.CrearTanqueCombustible(60);
-            builder.CrearTransmision(6);
-
-            Coche coche = builder.ObtenerCoche();
-
-            Coche expected = this.GetCar();
-
-            Assert.AreEqual(expected.ToString(), coche.ToString());
-
-        }
-
         [TestMethod]
         public void Construir_coche_y_evaluar_centralita()
         {
@@ -126,48 +109,6 @@ namespace Test.Unitarios.Builder
             Assert.IsNull(coche.LugarDeEnsamblado);
             Assert.IsNull(coche.Bastidor);
             Assert.AreEqual(new DateTime(), coche.FechaDeEnsamblado);
-
-        }
-
-        private Coche GetCar()
-        {
-            Coche coche = new CocheGasolina()
-            {
-                Centralita = new Centralita()
-                {
-                    ABS = true,
-                    Airbag = true,
-                    BAS = true,
-                    DireccionAsistida = true,
-                    ESP = false,
-                    GPS = true,
-                    TCS = false
-                },
-                Bastidor = "123456",
-                FechaDeEnsamblado = new DateTime(2015, 1, 1),
-                LugarDeEnsamblado = "Albacete",
-                Marca = "Matel",
-                Modelo = "Autoloco",
-                Motor = new Motor()
-                {
-                    Capacidad = 2000,
-                    PotenciaCV = 150,
-                    PotenciaKW = 110.3098125M,
-                    Cilindros = 4
-
-                },
-                TanqueCombustible = new TanqueCombustible()
-                {
-                    Capacidad = 66.5M
-                },
-                Transmision = new Transmision()
-                {
-                    Marchas = 6
-                }
-            };
-
-            return coche;
-
 
         }
 
