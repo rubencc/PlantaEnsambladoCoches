@@ -81,7 +81,7 @@ namespace Test.Unitarios.Builder
         [TestMethod]
         public void Construir_coche_y_evaluar_todas_las_partes()
         {
-            ICarBuilder builder = new DecoratorCarBuilder(new CarBuilder());
+            CarBuilder builder = new CarBuilder();
 
             builder.CrearCentralita(true, true, true, true, true, false, false);
             builder.CrearMotor(110.3098125M, 150, 2000, 4);
