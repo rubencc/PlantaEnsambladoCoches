@@ -53,6 +53,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Builder\CarBuilderTest.cs" />
+    <Compile Include="Factoria\ConcreteCarFactoryTest.cs" />
+    <Compile Include="Mocks\CarBuilderMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CocheTest.cs" />
   </ItemGroup>
@@ -70,9 +73,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Builder\" />
     <Folder Include="Decorator\" />
-    <Folder Include="Factoria\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -5,7 +5,7 @@ namespace Business.Factories
 {
     public abstract class CarFactory : ICarFactory
     {
-        private readonly ICarBuilder builder;
+        protected readonly ICarBuilder builder;
 
         protected CarFactory(ICarBuilder builder)
         {
@@ -16,7 +16,7 @@ namespace Business.Factories
 
         protected Coche EnsamblarCoche()
         {
-            return this.builder.EnsamblarCoche();
+            return this.builder.ObtenerCoche();
         }
     }
 }

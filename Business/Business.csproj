@@ -39,8 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Builder\CarBuilder.cs" />
     <Compile Include="Builder\ICarBuilder.cs" />
+    <Compile Include="Decorators\DecoratorCarBuilder.cs" />
     <Compile Include="Factories\CarFactory.cs" />
+    <Compile Include="Factories\ConcreteCarFactory.cs" />
     <Compile Include="Factories\ICarFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -50,9 +53,7 @@
       <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Decorators\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
